@@ -9,3 +9,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+.list-items {
+  @apply mb-4 bg-red-400 text-black px-2 rounded-md py-2 text-sm md:text-xl
+}
+
