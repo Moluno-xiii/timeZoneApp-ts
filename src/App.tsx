@@ -8,8 +8,8 @@ import CalculateTime from "./pages/CalculateTime";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="max-3xl:justify-center flex h-[100dvh] w-full flex-col items-center py-3">
+    <div className="max-3xl:justify-center flex h-[100dvh] w-full flex-col items-center py-3">
+        <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
           <Route path="getTime" element={<GetTime />} />
@@ -21,8 +21,8 @@ function App() {
           <AppNav />
           <Test /> */}
         </Routes>
-      </div>
     </BrowserRouter>
+      </div>
   );
 }
 

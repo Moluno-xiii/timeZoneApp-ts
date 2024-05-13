@@ -2,7 +2,12 @@ import { NavLink } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
+// const timeZoneURL =
+//   "https://cors-anywhere.herokuapp.com/https://timeapi.io/api/Time/current/ip?ipAddress=";
+
 const HomePage: React.FC = () => {
+
+     
   return (
     <>
     <nav className="text-center ">
@@ -30,9 +35,9 @@ const HomePage: React.FC = () => {
         </li>
       </ul>
     </nav>
-    <p className="absolute bottom-5">
+    <div className="absolute bottom-5">
       <Footer />
-    </p>
+    </div>
     </>
   );
 };

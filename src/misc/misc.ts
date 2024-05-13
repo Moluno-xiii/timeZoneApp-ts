@@ -1,4 +1,4 @@
-const validTimeZones: string = [
+const validTimeZones: string[] = [
   "Africa/Abidjan",
   "Africa/Accra",
   "Africa/Addis_Ababa",
@@ -595,3 +595,5 @@ const validTimeZones: string = [
   "WET",
   "Zulu",
 ];
+
+export {validTimeZones}
