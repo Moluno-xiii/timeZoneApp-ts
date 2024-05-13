@@ -5,12 +5,15 @@ const proxyURL = "http://localhost:3000/proxy?url";
 const timeZoneURL = "https://timeapi.io/api/Time/current/ip?ipAddress";
 
 const useFetchInfo = () => {
-    const [ipAddress, setIpAddress] = useState<string | null>(null)
-    const [timeZone, setTimeZone] = useState<string | null>(null)
-    const [errorMessage, setError] = useState<string | null>(null);
+  const [ipAddress, setIpAddress] = useState<string | null>(null);
+  const [timeZone, setTimeZone] = useState<string | null>(null);
+  const [errorMessage, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(function () {
     async function fetchIpInfo() {
       try {
+        setIsLoading(true);
+        setError(null);
         const response = await fetch(IpURL);
         const data = await response.json();
         console.log(data);
@@ -19,6 +22,8 @@ const useFetchInfo = () => {
       } catch (error: any) {
         console.error(error.message);
         setError("An error occurred while fetching IP address");
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchIpInfo();
@@ -28,6 +33,8 @@ const useFetchInfo = () => {
     function () {
       async function fetchTimeZone() {
         try {
+          setIsLoading(true);
+          setError(null);
           const response = await fetch(
             `${proxyURL}=${timeZoneURL}=${ipAddress}`,
           );
@@ -38,6 +45,8 @@ const useFetchInfo = () => {
         } catch (error: any) {
           console.error(error.message);
           setError("An error occurred while fetching timeZone data");
+        } finally {
+          setIsLoading(false);
         }
       }
       fetchTimeZone();
@@ -45,8 +54,7 @@ const useFetchInfo = () => {
     [ipAddress],
   );
 
-
-  return {ipAddress, timeZone, errorMessage};
+  return { ipAddress, timeZone, errorMessage, isLoading };
 };
 
 export default useFetchInfo;
