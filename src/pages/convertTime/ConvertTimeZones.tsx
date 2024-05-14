@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { validTimeZones } from "../../misc/misc";
 import Button from "../../components/Button";
+// import { validTimeZones } from "../../misc/misc";
+// import Button from "../../components/Button";
 
-const TimeZone: React.FC = () => {
+const ConvertTimeZones: React.FC = () => {
   const [fromTimeZone, setFromTimeZone] = useState<string>("");
-  const [result, setResult] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [toTimeZone, setToTimeZone] = useState<string>("");
+  const handleToTimeZoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setToTimeZone(e.target.value);
+  };
   const handleFromTimeZoneChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
   ) => {
@@ -24,18 +27,28 @@ const TimeZone: React.FC = () => {
         onChange={handleFromTimeZoneChange}
         className="focus:border-blue-500 focus:outline-none focus:ring-1"
       >
-        <option value="">Select time zone</option>
+        <option value="">From</option>
         {validTimeZones.map((timeZone, index) => (
           <option key={index} value={timeZone}>
             {timeZone}
           </option>
         ))}
       </select>
-      <Button className = "md:ml-5">
-        fetch data
-      </Button>
+      <select
+        value={toTimeZone}
+        onChange={handleToTimeZoneChange}
+        className="focus:border-blue-500 focus:outline-none focus:ring-1"
+      >
+        <option value="">To</option>
+        {validTimeZones.map((timeZone, index) => (
+          <option key={index} value={timeZone}>
+            {timeZone}
+          </option>
+        ))}
+      </select>
+      <Button className="md:ml-5">fetch data</Button>
     </div>
   );
 };
 
-export default TimeZone;
+export default ConvertTimeZones;

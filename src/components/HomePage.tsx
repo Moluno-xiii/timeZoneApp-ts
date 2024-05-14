@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
         </li>
       </ul>
     </nav>
-    <div className="absolute bottom-5">
+    <div className="bottom-5 float-end">
       <Footer />
     </div>
     </>
