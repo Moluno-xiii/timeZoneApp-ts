@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../components/Button";
 
 const IpAddress: React.FC = () => {
 const [ipPlaceholder, setIpPlaceholder] = useState<string>('')
@@ -19,6 +20,9 @@ const ipPlaceholderOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
         value={ipPlaceholder}
         onChange={ipPlaceholderOnchange}
       />
+      <Button className="md:ml-2">
+        fetch data
+      </Button>
     </div>
   );
 };

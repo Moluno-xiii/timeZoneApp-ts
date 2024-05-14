@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../components/Button";
 
 const GeoCoordinates: React.FC = () => {
   const [longitude, setLongitude] = useState<number>(0);
@@ -34,7 +35,9 @@ const GeoCoordinates: React.FC = () => {
         onChange={longitudeOnchange}
         />
         </div>
-      <button className="px-10 rounded-md bg-blue-400 mt-4 py-2 font-semibold">Fetch Data</button>
+      <Button className="">
+        Fetch Data
+      </Button>
     </div>
   );
 };

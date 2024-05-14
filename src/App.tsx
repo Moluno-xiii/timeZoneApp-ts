@@ -12,14 +12,15 @@ import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
-    <div className="max-3xl:justify-center flex h-[100dvh] w-full flex-col items-center py-3">
+    <div className="flex h-[100dvh] w-full flex-col items-center py-3 max-3xl:justify-center">
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
-          <Route path="getTime" element={<GetTime />} />
-          <Route path="timezone" element={<TimeZone />} />
-          <Route path="IPaddress" element={<IpAddress />} />
-          <Route path="geoCoordinates" element={<GeoCoordinates />} />
+          <Route path="getTime" element={<GetTime />}>
+            <Route path="timezone" element={<TimeZone />} />
+            <Route path="IPaddress" element={<IpAddress />} />
+            <Route path="geoCoordinates" element={<GeoCoordinates />} />
+          </Route>
           <Route path="convertTime" element={<TimeConversion />} />
           <Route path="findTimeZone" element={<FindTimeZone />} />
           <Route path="findIpAddress" element={<FindIpAddress />} />

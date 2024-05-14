@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useFetchInfo from "../../hooks/useFetchInfo";
 import Loader from "../../components/Loader";
 
@@ -6,21 +6,46 @@ const GetTime: React.FC = () => {
   const { ipAddress, timeZone, isLoading } = useFetchInfo();
   return (
     <div className="text-center">
-      <ul>
+      <ul className="flex flex-row gap-2 mx-2 md:gap-5">
         <li className="list-items">
-          <NavLink to="/timezone">Get time with timezone</NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-blue-500 font-bold" : "text-black"
+            }
+            to="timezone"
+          >
+           with timezone
+          </NavLink>
         </li>
         <li className="list-items">
-          <NavLink to="/IPaddress">Get time with IP Address</NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-blue-500 font-bold" : "text-black"
+            }
+            to="IPaddress"
+          >
+           with IP Address
+          </NavLink>
         </li>
         <li className="list-items">
-          <NavLink to="/geoCoordinates">Get time with Geo Coordinates</NavLink>
+          <NavLink
+            to="geoCoordinates"
+            className={({ isActive }) =>
+              isActive ? "text-blue-500 font-bold" : "text-black"
+            }
+          >
+           with Geo Coordinates
+          </NavLink>
         </li>
       </ul>
       <header>Get Time</header>
 
       {isLoading ? <Loader /> : <p>Your IP Address : {ipAddress}</p>}
       {isLoading ? <Loader /> : <p>Your TimeZone : {timeZone}</p>}
+
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 };

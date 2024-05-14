@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { validTimeZones } from "../../misc/misc";
+import Button from "../../components/Button";
 
 const TimeZone: React.FC = () => {
   const [fromTimeZone, setFromTimeZone] = useState<string>("");
@@ -43,6 +44,9 @@ const TimeZone: React.FC = () => {
           </option>
         ))}
       </select>
+      <Button className = "md:ml-5">
+        fetch data
+      </Button>
     </div>
   );
 };
