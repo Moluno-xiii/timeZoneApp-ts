@@ -5,12 +5,11 @@ import ErrorMessage from "../../components/ErrorMessage";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { convertTimeString } from "../../helper/helperFunctions";
 
-
 interface TimeZoneData {
   hasDayLightSaving: boolean;
   isDayLightSavingActive: boolean;
   timeZone: string;
-  currentLocalTime: boolean;
+  currentLocalTime: string;
   // Add other properties as needed
 }
 const proxyURL = "http://localhost:3000/proxy?url";
@@ -20,7 +19,7 @@ const GeoCoordinates: React.FC = () => {
   const [longitude, setLongitude] = useState<number | undefined>(position?.lng);
   const [latitude, setLatitude] = useState<number | undefined>(position?.lat);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [result, setResult] = useState<TimeZoneData | ''>('');
+  const [result, setResult] = useState<TimeZoneData | "">("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -37,9 +36,7 @@ const GeoCoordinates: React.FC = () => {
     setLatitude(position?.lat);
     setLongitude(position?.lng);
     console.log(position);
-    
   }, [position]);
-  
 
   async function fetchTimezoneInfo() {
     try {
@@ -62,9 +59,9 @@ const GeoCoordinates: React.FC = () => {
   const {
     hasDayLightSaving,
     isDayLightSavingActive,
-    currentLocalTime = "",
-    timeZone = "",
-  } = result;
+    currentLocalTime,
+    timeZone,
+  } = result as TimeZoneData
 
   return (
     <div className="text-center">
@@ -93,8 +90,10 @@ const GeoCoordinates: React.FC = () => {
       <Button onClick={fetchTimezoneInfo}>Fetch Data</Button>
       {!isLoading && !errorMessage && result && (
         <ul>
-         {timeZone && <li>Your Timezone : {timeZone}</li>}
-          {hasDayLightSaving && <li>Daylight Saving : {hasDayLightSaving ? "YES" : "NO"}</li>}
+          {timeZone && <li>Your Timezone : {timeZone}</li>}
+          {hasDayLightSaving && (
+            <li>Daylight Saving : {hasDayLightSaving ? "YES" : "NO"}</li>
+          )}
           {hasDayLightSaving && (
             <li>result : {isDayLightSavingActive ? "ACTIVE" : "INACTIVE"}</li>
           )}
@@ -113,26 +112,4 @@ const GeoCoordinates: React.FC = () => {
 };
 
 export default GeoCoordinates;
-// currentLocalTime
-// :
-// "2024-05-28T11:56:48.8930026"
-// currentUtcOffset
-// :
-// {seconds: 0, milliseconds: 0, ticks: 0, nanoseconds: 0}
-// dstInterval
-// :
-// null
-// hasDayLightSaving
-// :
-// false
-// isDayLightSavingActive
-// :
-// false
-// standardUtcOffset
-// :
-// {seconds: 0, milliseconds: 0, ticks: 0, nanoseconds: 0}
-// timeZone
-// :
-// "Africa/Accra"
 
-// :

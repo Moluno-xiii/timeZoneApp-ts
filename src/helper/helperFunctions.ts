@@ -2,7 +2,7 @@ const convertTimeString = (dateString: string) => {
   const [date, timeString] = dateString.split("T");
   const time = timeString.split(".")[0];
 
-  let [hour, minute, seconds] = time.split(":").map(Number);
+  let [hour, minute,] = time.split(":").map(Number);
 
   let suffix = hour < 12 ? "AM" : "PM";
 

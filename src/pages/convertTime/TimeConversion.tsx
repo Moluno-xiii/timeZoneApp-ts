@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom"; 
 import useFetchInfo from "../../hooks/useFetchInfo";
 import Loader from "../../components/Loader";
 
@@ -12,7 +12,7 @@ const TimeConversion: React.FC = () => {
             className={({ isActive }) =>
               isActive ? "font-bold text-blue-500" : "text-black"
             }
-            to="convertZones"
+            to="convert-zones" end
           >
             convert time to different zones
           </NavLink>
@@ -22,7 +22,7 @@ const TimeConversion: React.FC = () => {
             className={({ isActive }) =>
               isActive ? "font-bold text-blue-500" : "text-black"
             }
-            to="convertToWeek"
+            to="convert-to-Week"
           >
             convert date to day of week
           </NavLink>
@@ -30,7 +30,7 @@ const TimeConversion: React.FC = () => {
 
         <li className="list-items">
           <NavLink
-            to="convertToDay"
+            to="convert-to-day"
             className={({ isActive }) =>
               isActive ? "font-bold text-blue-500" : "text-black"
             }
