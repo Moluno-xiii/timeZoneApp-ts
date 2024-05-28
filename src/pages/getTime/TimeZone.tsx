@@ -5,6 +5,7 @@ import Loader from "../../components/Loader";
 import { convertTimeString } from "../../helper/helperFunctions";
 import { useTimezoneContext } from "../../contexts/TimezoneContext";
 import Spinner from "../../components/Spinner";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const TimeZone: React.FC = () => {
   const {
@@ -13,6 +14,7 @@ const TimeZone: React.FC = () => {
     fromTimezone,
     handleFromTimeZoneChange,
     isLoading,
+    errorMessage
   } = useTimezoneContext();
   const { timeZone : tzData, isLoading: loadingTz } = useFetchInfo();
 
@@ -26,6 +28,7 @@ const TimeZone: React.FC = () => {
 
   if (isLoading) return <Spinner />;
   if (loadingTz) return <Spinner />;
+     if (errorMessage) return <ErrorMessage message={errorMessage} />;
   return (
     <div className="text-center">
       <header className="text-2xl font-bold">

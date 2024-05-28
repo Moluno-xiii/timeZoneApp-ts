@@ -2,60 +2,34 @@ import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import useFetchInfo from "../../hooks/useFetchInfo";
 import Loader from "../../components/Loader";
+import { useIpContext } from "../../contexts/IpContext";
+import Spinner from "../../components/Spinner";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const proxyURL = "http://localhost:3000/proxy?url";
 const API_URL = "https://timeapi.io/api/TimeZone/ip?ipAddress";
 
 const IpAddress: React.FC = () => {
-  const { ipAddress } = useFetchInfo();
-  const stringIp = ipAddress ? ipAddress.toString() : "";
-  const [ipPlaceholder, setIpPlaceholder] = useState<string>(stringIp);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [result, setResult] = useState<Record<string, any> | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {
+    FetchIpData,
+    ipPlaceholderOnchange,
+    formattedTime,
+    ipPlaceholder,
+    ipData,
+    errorMessage,
+    isLoading,
+  } = useIpContext();
 
-  const ipPlaceholderOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIpPlaceholder(e.target.value);
-  };
+  const { ipAddress, isLoading: loadingIp } = useFetchInfo();
 
-  useEffect(() => {
-    setIpPlaceholder(stringIp);
-  }, [stringIp]);
-
-  async function FetchIpData() {
-    try {
-      setIsLoading(true);
-      setErrorMessage("");
-      const response = await fetch(`${proxyURL}=${API_URL}=${ipPlaceholder}`);
-      const data = await response.json();
-      console.log(data);
-      setResult(data);
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch {
-      setErrorMessage("An error occurred, check your input and try again");
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  const currentLocalTime = result?.currentLocalTime;
-  const [date, time] = currentLocalTime
-    ? currentLocalTime.split("T")
-    : ["", ""];
-  const formattedTime = time.split(".")[0];
+  if (isLoading) return <Spinner />;
+  if (loadingIp) return <Spinner />;
 
   return (
     <div className="text-center">
-      {ipAddress ? (
-        <header className="mb-4 text-2xl font-bold">
-          Your IpAddress is : {ipAddress}
-        </header>
-      ) : (
-        <Loader />
-      )}
-
+      <header className="mb-4 text-2xl font-bold">
+        Your IpAddress is : {ipAddress}
+      </header>
       <input
         type="text"
         placeholder="00.00.00.00"
@@ -63,25 +37,27 @@ const IpAddress: React.FC = () => {
         value={ipPlaceholder}
         onChange={ipPlaceholderOnchange}
       />
-      <Button className="md:ml-2" onClick={FetchIpData}>
-        fetch data
-      </Button>
 
-      {!isLoading && !errorMessage && result && (
+      {errorMessage ? (
+        <ErrorMessage message={errorMessage} />
+      ) : (
         <div>
-          <p>Your TimeZone : {result.timeZone} </p>
+          <p>Your Timezone : {ipData?.timeZone} </p>
           <p>Your current Time : {formattedTime} </p>
-          <p>Your current Date : {date} </p>
+          {/* <p>Your current Date : {date} </p> */}
           <p>
             Daylight Savings :{" "}
-            {result.hasDayLightSaving === false ? "INACTIVE" : "ACTIVE"}{" "}
+            {ipData?.hasDayLightSaving === false ? "INACTIVE" : "ACTIVE"}{" "}
           </p>
           <p>
             Daylight Savings Active :{" "}
-            {result.isDayLightSavingActive === false ? "INACTIVE" : "ACTIVE"}{" "}
+            {ipData?.isDayLightSavingActive === false ? "INACTIVE" : "ACTIVE"}{" "}
           </p>
         </div>
       )}
+      <Button className="md:ml-2" onClick={FetchIpData}>
+        fetch data
+      </Button>
     </div>
   );
 };

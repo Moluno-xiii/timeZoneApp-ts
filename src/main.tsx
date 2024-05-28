@@ -16,6 +16,7 @@ import ConvertToDay from "./pages/convertTime/ConvertToDay.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
 import CalculateTime from "./pages/CalculateTime.tsx";
 import TimezoneProvider from "./contexts/TimezoneContext.tsx";
+import IpProvider from "./contexts/IpContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
           },
           {
             path: "IpAddress",
-            element: <IpAddress />,
+            element: (
+              <IpProvider>
+                <IpAddress />,
+              </IpProvider>
+            ),
           },
           {
             path: "GeoCoordinates",

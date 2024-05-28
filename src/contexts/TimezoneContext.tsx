@@ -55,13 +55,13 @@ const TimezoneContext =
 const timezoneReducer = (state: TimeZoneState, action: Action) => {
   switch (action.type) {
     case "SET_REQUEST_DATA":
-      return { ...state, isLoading: true};
+      return { ...state, isLoading: true, errorMessage : ""};
     case "SET_FROM_TIMEZONE":
       return { ...state, fromTimezone: action.payload };
     case "SET_RECEIVED_DATA":
       return { ...state, isLoading: false, timezoneData: action.payload };
     case "SET_ERROR_MESSAGE":
-      return { ...state, errorMessage: action.payload };
+      return { ...state, errorMessage: action.payload, isLoading : false };
     default:
       return state;
   }
