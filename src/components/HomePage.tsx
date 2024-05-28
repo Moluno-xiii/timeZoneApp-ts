@@ -13,15 +13,15 @@ const HomePage: React.FC = () => {
     <nav className="text-center ">
       <Header />
       <ul>
-        <NavLink to="getTime">
+        <NavLink to="get-time">
           <li className="list-items">Get time</li>
         </NavLink>
 
-        <NavLink to="convertTime">
+        <NavLink to="convert-time">
           <li className="list-items">Time conversion</li>
         </NavLink>
 
-        <NavLink to="calculateTime">
+        <NavLink to="calculate-time">
           <li className="list-items">
             Calculate Time by incrementing or decrementing
           </li>

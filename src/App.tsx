@@ -37,11 +37,10 @@ function App() {
             <Route path="calculateTime" element={<CalculateTime />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
-          {/* <Header />
-          <AppNav />
-          <Test /> */}
+
         </Routes>
       </BrowserRouter>
+    
     </div>
   );
 }
