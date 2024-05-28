@@ -12,7 +12,7 @@ const GetTime: React.FC = () => {
             className={({ isActive }) =>
               isActive ? "text-blue-500 font-bold" : "text-black"
             }
-            to="timezone"
+            to="/get-time" end
           >
            with timezone
           </NavLink>

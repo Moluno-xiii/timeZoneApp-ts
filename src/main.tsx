@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     errorElement: <PageNotFound />,
     children: [
       {
-        path: "/",
+        index : true,
         element: <HomePage />,
       },
       {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         element: <GetTime />,
         children: [
           {
-            path: "timezone",
+            index: true,
             element: <TimeZone />,
           },
           {
