@@ -12,7 +12,7 @@ const TimeConversion: React.FC = () => {
             className={({ isActive }) =>
               isActive ? "font-bold text-blue-500" : "text-black"
             }
-            to="convert-zones" end
+            to="/convert-time" end
           >
             convert time to different zones
           </NavLink>

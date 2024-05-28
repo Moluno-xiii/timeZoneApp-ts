@@ -38,10 +38,10 @@ const GetTime: React.FC = () => {
           </NavLink>
         </li>
       </ul>
-      <header>Get Time</header>
+      {/* <header>Get Time</header> */}
 
-      {isLoading ? <Loader /> : <p>Your IP Address : {ipAddress}</p>}
-      {isLoading ? <Loader /> : <p>Your TimeZone : {timeZone}</p>}
+      {/* {isLoading ? <Loader /> : <p>Your IP Address : {ipAddress}</p>}
+      {isLoading ? <Loader /> : <p>Your TimeZone : {timeZone}</p>} */}
 
       <main>
         <Outlet />

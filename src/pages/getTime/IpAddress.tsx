@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import useFetchInfo from "../../hooks/useFetchInfo";
+import Loader from "../../components/Loader";
 
 const proxyURL = "http://localhost:3000/proxy?url";
 const API_URL = "https://timeapi.io/api/TimeZone/ip?ipAddress";
 
-
 const IpAddress: React.FC = () => {
-  const {ipAddress} = useFetchInfo()
-  const stringIp = ipAddress? ipAddress.toString() : ""
+  const { ipAddress } = useFetchInfo();
+  const stringIp = ipAddress ? ipAddress.toString() : "";
   const [ipPlaceholder, setIpPlaceholder] = useState<string>(stringIp);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [result, setResult] = useState<Record<string, any> | null>(null);
@@ -19,9 +19,9 @@ const IpAddress: React.FC = () => {
     setIpPlaceholder(e.target.value);
   };
 
-  useEffect(()=> {
-    setIpPlaceholder(stringIp)
-  }, [stringIp])
+  useEffect(() => {
+    setIpPlaceholder(stringIp);
+  }, [stringIp]);
 
   async function FetchIpData() {
     try {
@@ -44,14 +44,18 @@ const IpAddress: React.FC = () => {
   const [date, time] = currentLocalTime
     ? currentLocalTime.split("T")
     : ["", ""];
-    const formattedTime = time.split(".")[0]
-  
+  const formattedTime = time.split(".")[0];
+
   return (
     <div className="text-center">
-      <header className="mb-4 text-2xl font-bold">
-        Your IpAddress is : {ipAddress}
-      </header>
-   
+      {ipAddress ? (
+        <header className="mb-4 text-2xl font-bold">
+          Your IpAddress is : {ipAddress}
+        </header>
+      ) : (
+        <Loader />
+      )}
+
       <input
         type="text"
         placeholder="00.00.00.00"

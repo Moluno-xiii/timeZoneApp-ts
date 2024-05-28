@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <TimeConversion />,
         children: [
           {
-            path: "convert-zones",
+            index: true,
             element: <ConvertTimeZones />,
           },
           {
