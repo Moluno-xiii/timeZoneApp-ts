@@ -15,6 +15,7 @@ import ConvertToWeek from "./pages/convertTime/ConvertToWeek.tsx";
 import ConvertToDay from "./pages/convertTime/ConvertToDay.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
 import CalculateTime from "./pages/CalculateTime.tsx";
+import TimezoneProvider from "./contexts/TimezoneContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
     errorElement: <PageNotFound />,
     children: [
       {
-        index : true,
+        index: true,
         element: <HomePage />,
       },
       {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <TimeZone />,
+            element: (
+              <TimezoneProvider>
+                <TimeZone />,
+              </TimezoneProvider>
+            ),
           },
           {
             path: "IpAddress",
