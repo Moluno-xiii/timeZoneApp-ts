@@ -11,7 +11,6 @@ const HomePage: React.FC = () => {
   return (
     <>
     <nav className="text-center ">
-      <Header />
       <ul>
         <NavLink to="get-time">
           <li className="list-items">Get time</li>

@@ -1,9 +1,14 @@
-const Header: React.FC = () => {
-    return (
-        <header className="text-blue-600 text-2xl font-bold mb-5">
-            TimeZone App
-        </header>
-    )
-}
+import { NavLink } from "react-router-dom";
+import { RiTimeZoneLine } from "react-icons/ri";
 
-export default Header
+const Header: React.FC = () => {
+  return (
+    <nav className="mb-4 text-red-400">
+      <NavLink to="/" className="text-2xl font-bold">
+        <RiTimeZoneLine />
+      </NavLink>
+    </nav>
+  );
+};
+
+export default Header;
