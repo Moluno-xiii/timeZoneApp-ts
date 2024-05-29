@@ -1,9 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
-import useFetchInfo from "../../hooks/useFetchInfo";
-import Loader from "../../components/Loader";
 
 const GetTime: React.FC = () => {
-  const { ipAddress, timeZone, isLoading } = useFetchInfo();
   return (
     <div className="text-center">
       <ul className="flex flex-row gap-2 mx-2 md:gap-5">
@@ -38,10 +35,7 @@ const GetTime: React.FC = () => {
           </NavLink>
         </li>
       </ul>
-      {/* <header>Get Time</header> */}
 
-      {/* {isLoading ? <Loader /> : <p>Your IP Address : {ipAddress}</p>}
-      {isLoading ? <Loader /> : <p>Your TimeZone : {timeZone}</p>} */}
 
       <main>
         <Outlet />

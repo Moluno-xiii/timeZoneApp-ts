@@ -1,7 +1,6 @@
 import { validTimeZones } from "../../misc/misc";
 import Button from "../../components/Button";
 import useFetchInfo from "../../hooks/useFetchInfo";
-import Loader from "../../components/Loader";
 import { convertTimeString } from "../../helper/helperFunctions";
 import { useTimezoneContext } from "../../contexts/TimezoneContext";
 import Spinner from "../../components/Spinner";
@@ -14,27 +13,27 @@ const TimeZone: React.FC = () => {
     fromTimezone,
     handleFromTimeZoneChange,
     isLoading,
-    errorMessage
+    errorMessage,
   } = useTimezoneContext();
-  const { timeZone : tzData, isLoading: loadingTz } = useFetchInfo();
+  const { timeZone: tzData, isLoading: loadingTz } = useFetchInfo();
 
   const {
     date = "",
     dateTime = "",
     dayOfWeek = "",
     dstActive,
-    timeZone
+    timeZone,
   } = timezoneData || {};
 
   if (isLoading) return <Spinner />;
   if (loadingTz) return <Spinner />;
-     if (errorMessage) return <ErrorMessage message={errorMessage} />;
+  if (errorMessage) return <ErrorMessage message={errorMessage} />;
   return (
     <div className="text-center">
       <header className="text-2xl font-bold">
         Get IANA time using Timezone
       </header>
-      {loadingTz ? <Loader /> : <p>Your Local Timezone : {tzData}</p>}
+      <p className="mb-4 text-xl font-bold">Your Local Timezone : {tzData}</p>
 
       <select
         value={fromTimezone}
@@ -52,7 +51,9 @@ const TimeZone: React.FC = () => {
       <ul className="mt-5">
         {timeZone && <li>Timezone name :{timeZone}</li>}
         {date && <li>Timezone Date :{date}</li>}
-        {dateTime && <li>Timezone time :{convertTimeString(dateTime).newTime}</li>}
+        {dateTime && (
+          <li>Timezone time :{convertTimeString(dateTime).newTime}</li>
+        )}
         {dayOfWeek && <li>Day of week :{dayOfWeek}</li>}
         {dstActive !== undefined && (
           <li>

@@ -17,6 +17,8 @@ import PageNotFound from "./pages/PageNotFound.tsx";
 import CalculateTime from "./pages/CalculateTime.tsx";
 import TimezoneProvider from "./contexts/TimezoneContext.tsx";
 import IpProvider from "./contexts/IpContext.tsx";
+// import Spinner from "./components/Spinner.tsx";
+import GeoContextProvider from "./contexts/GeoContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -50,7 +52,15 @@ const router = createBrowserRouter([
           },
           {
             path: "GeoCoordinates",
-            element: <GeoCoordinates />,
+            element: (
+              <GeoContextProvider>
+                <GeoCoordinates />,
+              </GeoContextProvider>
+            ),
+          },
+          {
+            path: "IpAddress/:id",
+            element: <IndexPage />,
           },
         ],
       },

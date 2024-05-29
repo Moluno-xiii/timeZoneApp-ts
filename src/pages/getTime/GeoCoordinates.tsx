@@ -1,76 +1,37 @@
-import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { convertTimeString } from "../../helper/helperFunctions";
+import { useGeoContext } from "../../contexts/GeoContext";
+import Spinner from "../../components/Spinner";
 
-interface TimeZoneData {
-  hasDayLightSaving: boolean;
-  isDayLightSavingActive: boolean;
-  timeZone: string;
-  currentLocalTime: string;
-  // Add other properties as needed
-}
-const proxyURL = "http://localhost:3000/proxy?url";
-const API_URL = "https://timeapi.io/api/TimeZone/coordinate?";
+
 const GeoCoordinates: React.FC = () => {
-  const { position } = useGeolocation();
-  const [longitude, setLongitude] = useState<number | undefined>(position?.lng);
-  const [latitude, setLatitude] = useState<number | undefined>(position?.lat);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [result, setResult] = useState<TimeZoneData | "">("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const latitudeOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setLatitude(isNaN(value) ? 0 : value);
-  };
-  const longitudeOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setLongitude(isNaN(value) ? 0 : value);
-  };
-
-  useEffect(() => {
-    setLatitude(position?.lat);
-    setLongitude(position?.lng);
-    console.log(position);
-  }, [position]);
-
-  async function fetchTimezoneInfo() {
-    try {
-      setIsLoading(true);
-      setErrorMessage("");
-      const response = await fetch(
-        `${proxyURL}=${API_URL}latitude=${latitude}&longitude=${longitude}`,
-      );
-      const data = await response.json();
-      console.log(data);
-      console.log(position);
-      setResult(data);
-    } catch {
-      setErrorMessage("failed to fetch, check your input");
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
+  const { position, isLoading : loadingIp } = useGeolocation();
   const {
-    hasDayLightSaving,
-    isDayLightSavingActive,
-    currentLocalTime,
-    timeZone,
-  } = result as TimeZoneData
+    fetchTimezoneInfo,
+    formattedTime,
+    latitudeOnchange,
+    longitudeOnchange,
+    errorMessage,
+    isLoading,
+    geoData,
+    latitude,
+    longitude,
+  } = useGeoContext();
 
+    if (isLoading) return <Spinner />;
+    if (loadingIp) return <Spinner />;
   return (
     <div className="text-center">
       <header className="mb-4 text-2xl font-bold">
         Get time with Geo Coordinates
       </header>
-      <div>
-        <p>
-          your coordinates are latitude : {latitude} longitude :{longitude}
+      <div className="">
+        <p className="font-bold text-xl mb-4">
+          your coordinates are latitude : {position?.lat} longitude :
+          {position?.lng}
         </p>
         <input
           type="text"
@@ -87,29 +48,37 @@ const GeoCoordinates: React.FC = () => {
           onChange={longitudeOnchange}
         />
       </div>
-      <Button onClick={fetchTimezoneInfo}>Fetch Data</Button>
-      {!isLoading && !errorMessage && result && (
+
+      {errorMessage && <ErrorMessage message={errorMessage} />}
+
+      {geoData && !errorMessage && (
         <ul>
-          {timeZone && <li>Your Timezone : {timeZone}</li>}
-          {hasDayLightSaving && (
-            <li>Daylight Saving : {hasDayLightSaving ? "YES" : "NO"}</li>
+          {geoData.timeZone && <li>Your Timezone : {geoData.timeZone}</li>}
+          {geoData.hasDayLightSaving !== undefined && (
+            <li>
+              Daylight Saving : {geoData.hasDayLightSaving ? "YES" : "NO"}
+            </li>
           )}
-          {hasDayLightSaving && (
-            <li>result : {isDayLightSavingActive ? "ACTIVE" : "INACTIVE"}</li>
+          {geoData.hasDayLightSaving && (
+            <li>
+              Daylight Saving :{" "}
+              {geoData.isDayLightSavingActive ? "ACTIVE" : "INACTIVE"}
+            </li>
           )}
-          {currentLocalTime && (
+          {geoData.currentLocalTime && (
             <>
-              <li>Your Date : {convertTimeString(currentLocalTime).date}</li>
-              <li>Your time : {convertTimeString(currentLocalTime).newTime}</li>
+              <li>
+                Your Date : {convertTimeString(geoData.currentLocalTime).date}
+              </li>
+              <li>Your time : {formattedTime}</li>
             </>
           )}
         </ul>
       )}
+      <Button onClick={fetchTimezoneInfo}>Fetch Data</Button>
       {isLoading && <Loader />}
-      {errorMessage.length > 1 && <ErrorMessage message={errorMessage} />}
     </div>
   );
 };
 
 export default GeoCoordinates;
-

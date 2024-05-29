@@ -5,6 +5,9 @@ export default {
     extend: {
       screens : {
         "3xl" : "2400px"
+      },
+      fontFamily:{
+        "sans" : "Nunito"
       }
     },
   },

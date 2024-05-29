@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import useFetchInfo from "../../hooks/useFetchInfo";
-import Loader from "../../components/Loader";
 import { useIpContext } from "../../contexts/IpContext";
 import Spinner from "../../components/Spinner";
 import ErrorMessage from "../../components/ErrorMessage";
-
-const proxyURL = "http://localhost:3000/proxy?url";
-const API_URL = "https://timeapi.io/api/TimeZone/ip?ipAddress";
 
 const IpAddress: React.FC = () => {
   const {
@@ -24,6 +19,7 @@ const IpAddress: React.FC = () => {
 
   if (isLoading) return <Spinner />;
   if (loadingIp) return <Spinner />;
+  // if (!ipData) return;
 
   return (
     <div className="text-center">
@@ -37,11 +33,8 @@ const IpAddress: React.FC = () => {
         value={ipPlaceholder}
         onChange={ipPlaceholderOnchange}
       />
-
-      {errorMessage ? (
-        <ErrorMessage message={errorMessage} />
-      ) : (
-        <div>
+      {ipData && (
+        <div className="">
           <p>Your Timezone : {ipData?.timeZone} </p>
           <p>Your current Time : {formattedTime} </p>
           {/* <p>Your current Date : {date} </p> */}
@@ -55,6 +48,8 @@ const IpAddress: React.FC = () => {
           </p>
         </div>
       )}
+
+      {errorMessage && <ErrorMessage message={errorMessage} />}
       <Button className="md:ml-2" onClick={FetchIpData}>
         fetch data
       </Button>
