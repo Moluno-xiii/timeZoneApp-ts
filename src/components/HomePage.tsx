@@ -1,13 +1,8 @@
 import { NavLink } from "react-router-dom";
-import Header from "./Header";
 import Footer from "./Footer";
-
-// const timeZoneURL =
-//   "https://cors-anywhere.herokuapp.com/https://timeapi.io/api/Time/current/ip?ipAddress=";
 
 const HomePage: React.FC = () => {
 
-     
   return (
     <>
     <nav className="text-center ">
@@ -26,12 +21,12 @@ const HomePage: React.FC = () => {
           </li>
         </NavLink>
 
-        <li>
+        {/* <li>
           Don't know your timezone, check it
           <NavLink to="findTimeZone">
             <span className="text-purple-500"> here</span>
           </NavLink>
-        </li>
+        </li> */}
       </ul>
     </nav>
     <div className="bottom-5 float-end">

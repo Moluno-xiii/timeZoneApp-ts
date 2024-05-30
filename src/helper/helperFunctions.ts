@@ -1,8 +1,11 @@
 const convertTimeString = (dateString: string) => {
+  if (!dateString) {
+    return { newTime: "", date: "" };
+  }
   const [date, timeString] = dateString.split("T");
   const time = timeString.split(".")[0];
 
-  let [hour, minute,] = time.split(":").map(Number);
+  let [hour, minute] = time.split(":").map(Number);
 
   let suffix = hour < 12 ? "AM" : "PM";
 
@@ -14,12 +17,9 @@ const convertTimeString = (dateString: string) => {
     hour %= 12;
   }
 
-  
   const newTime = `${hour}:${minute} ${suffix}`;
   // console.log(newTime)
-  return {newTime, date}
+  return { newTime, date };
 };
 
 export { convertTimeString };
-
-
