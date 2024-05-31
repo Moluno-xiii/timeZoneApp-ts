@@ -1,6 +1,6 @@
 import Button from "../../components/Button";
 import useFetchInfo from "../../hooks/useFetchInfo";
-import { useIpContext } from "../../contexts/IpContext";
+import { useIpContext } from "../../contexts/GetTime/IpContext";
 import Spinner from "../../components/Spinner";
 import ErrorMessage from "../../components/ErrorMessage";
 
@@ -24,12 +24,13 @@ const IpAddress: React.FC = () => {
   return (
     <div className="text-center">
       <header className="mb-4 text-2xl font-bold">
-        Your IpAddress is : {ipAddress}
+        Get Time info using any IpAddress <br/>
+        Your Location's IpAddress is : {ipAddress}
       </header>
       <input
         type="text"
         placeholder="00.00.00.00"
-        className="border-2 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1"
+        className="border-2 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 transition-all duration-300"
         value={ipPlaceholder}
         onChange={ipPlaceholderOnchange}
       />

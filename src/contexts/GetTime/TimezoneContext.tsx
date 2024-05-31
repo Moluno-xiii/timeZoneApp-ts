@@ -1,5 +1,11 @@
-import { createContext, ReactNode, useContext, useEffect, useReducer } from "react";
-import useFetchInfo from "../hooks/useFetchInfo";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
+import useFetchInfo from "../../hooks/useFetchInfo";
 
 const proxyURL = "http://localhost:3000/proxy?url=";
 const timeZoneURL = "https://timeapi.io/api/Time/current/zone?timeZone=";
@@ -9,7 +15,7 @@ interface TimeZoneData {
   dateTime: string;
   dayOfWeek: string;
   dstActive: boolean;
-  timeZone: string
+  timeZone: string;
 }
 
 interface TimezoneContextValue {
@@ -32,7 +38,7 @@ type Action =
   | { type: "SET_FROM_TIMEZONE"; payload: string }
   | { type: "SET_ERROR_MESSAGE"; payload: string }
   | { type: "SET_RECEIVED_DATA"; payload: TimeZoneData }
-  | { type: "SET_REQUEST_DATA";};
+  | { type: "SET_REQUEST_DATA" };
 
 const defaultContextValue: TimezoneContextValue = {
   timezoneData: null,
@@ -55,13 +61,13 @@ const TimezoneContext =
 const timezoneReducer = (state: TimeZoneState, action: Action) => {
   switch (action.type) {
     case "SET_REQUEST_DATA":
-      return { ...state, isLoading: true, errorMessage : ""};
+      return { ...state, isLoading: true, errorMessage: "" };
     case "SET_FROM_TIMEZONE":
       return { ...state, fromTimezone: action.payload };
     case "SET_RECEIVED_DATA":
       return { ...state, isLoading: false, timezoneData: action.payload };
     case "SET_ERROR_MESSAGE":
-      return { ...state, errorMessage: action.payload, isLoading : false };
+      return { ...state, errorMessage: action.payload, isLoading: false };
     default:
       return state;
   }
@@ -119,13 +125,10 @@ const TimezoneProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-export const useTimezoneContext =  () => {
-    const context = useContext(TimezoneContext)
-    if(context === undefined) throw new Error('context is undefined'
-
-    )
-return context
-
-}
+export const useTimezoneContext = () => {
+  const context = useContext(TimezoneContext);
+  if (context === undefined) throw new Error("context is undefined");
+  return context;
+};
 
 export default TimezoneProvider;

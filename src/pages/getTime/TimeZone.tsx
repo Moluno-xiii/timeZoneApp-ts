@@ -2,7 +2,7 @@ import { validTimeZones } from "../../misc/misc";
 import Button from "../../components/Button";
 import useFetchInfo from "../../hooks/useFetchInfo";
 import { convertTimeString } from "../../helper/helperFunctions";
-import { useTimezoneContext } from "../../contexts/TimezoneContext";
+import { useTimezoneContext } from "../../contexts/GetTime/TimezoneContext";
 import Spinner from "../../components/Spinner";
 import ErrorMessage from "../../components/ErrorMessage";
 
@@ -25,7 +25,7 @@ const TimeZone: React.FC = () => {
     timeZone,
   } = timezoneData || {};
 
-  if (isLoading) return <Spinner />;
+  // if (isLoading) return <Spinner />;
   if (loadingTz) return <Spinner />;
   if (errorMessage) return <ErrorMessage message={errorMessage} />;
   return (
@@ -38,7 +38,7 @@ const TimeZone: React.FC = () => {
       <select
         value={fromTimezone}
         onChange={handleFromTimeZoneChange}
-        className="focus:border-blue-500 focus:outline-none focus:ring-1"
+        className="focus:border-blue-500 border border-stone-300 focus:outline-none transition-all duration-300 focus:ring-1"
       >
         <option value="">Select time zone</option>
         {validTimeZones.map((timeZone, index) => (

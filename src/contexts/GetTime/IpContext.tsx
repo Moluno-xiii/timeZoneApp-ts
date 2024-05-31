@@ -5,8 +5,8 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import useFetchInfo from "../hooks/useFetchInfo";
-import { convertTimeString } from "../helper/helperFunctions";
+import useFetchInfo from "../../hooks/useFetchInfo";
+import { convertTimeString } from "../../helper/helperFunctions";
 
 const proxyURL = "http://localhost:3000/proxy?url";
 const API_URL = "https://timeapi.io/api/TimeZone/ip?ipAddress";
@@ -68,7 +68,7 @@ const IpReducer = (state: TimeZoneState, action: Action) => {
     case "SET_RECEIVED_DATA":
       return { ...state, isLoading: false, ipData: action.payload };
     case "SET_ERROR_MESSAGE":
-      return { ...state, errorMessage: action.payload, isLoading : false };
+      return { ...state, errorMessage: action.payload, isLoading: false };
     default:
       return state;
   }

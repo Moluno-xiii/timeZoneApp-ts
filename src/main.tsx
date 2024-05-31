@@ -15,9 +15,9 @@ import ConvertToWeek from "./pages/convertTime/ConvertToWeek.tsx";
 import ConvertToDay from "./pages/convertTime/ConvertToDay.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
 import CalculateTime from "./pages/CalculateTime.tsx";
-import TimezoneProvider from "./contexts/TimezoneContext.tsx";
-import IpProvider from "./contexts/IpContext.tsx";
-import GeoContextProvider from "./contexts/GeoContext.tsx";
+import TimezoneProvider from "./contexts/GetTime/TimezoneContext.tsx";
+import IpProvider from "./contexts/GetTime/IpContext.tsx";
+import GeoContextProvider from "./contexts/GetTime/GeoContext.tsx";
 
 const router = createBrowserRouter([
   {

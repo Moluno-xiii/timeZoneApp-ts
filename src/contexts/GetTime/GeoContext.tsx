@@ -5,8 +5,8 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import { convertTimeString } from "../helper/helperFunctions";
-import { useGeolocation } from "../hooks/useGeolocation";
+import { convertTimeString } from "../../helper/helperFunctions";
+import { useGeolocation } from "../../hooks/useGeolocation";
 
 const proxyURL = "http://localhost:3000/proxy?url";
 const API_URL = "https://timeapi.io/api/TimeZone/coordinate?";
@@ -42,7 +42,7 @@ const defaultContextValue: geoContextValue = {
   geoData: null,
   errorMessage: "",
   formattedTime: "",
-  latitude : null,
+  latitude: null,
   longitude: null,
   isLoading: false,
   longitudeOnchange: () => {},
@@ -87,7 +87,6 @@ const IpReducer = (state: geoDataState, action: Action) => {
 const GeoContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-
   const [{ geoData, latitude, longitude, errorMessage, isLoading }, dispatch] =
     useReducer(IpReducer, initialState);
 
@@ -138,7 +137,7 @@ const GeoContextProvider: React.FC<{ children: ReactNode }> = ({
     fetchTimezoneInfo,
     latitudeOnchange,
     longitudeOnchange,
-    latitude, 
+    latitude,
     longitude,
     errorMessage,
     isLoading,

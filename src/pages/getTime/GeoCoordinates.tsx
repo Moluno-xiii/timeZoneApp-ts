@@ -3,12 +3,11 @@ import Loader from "../../components/Loader";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { convertTimeString } from "../../helper/helperFunctions";
-import { useGeoContext } from "../../contexts/GeoContext";
+import { useGeoContext } from "../../contexts/GetTime/GeoContext";
 import Spinner from "../../components/Spinner";
 
-
 const GeoCoordinates: React.FC = () => {
-  const { position, isLoading : loadingIp } = useGeolocation();
+  const { position, isLoading: loadingIp } = useGeolocation();
   const {
     fetchTimezoneInfo,
     formattedTime,
@@ -21,28 +20,28 @@ const GeoCoordinates: React.FC = () => {
     longitude,
   } = useGeoContext();
 
-    if (isLoading) return <Spinner />;
-    if (loadingIp) return <Spinner />;
+  if (isLoading) return <Spinner />;
+  if (loadingIp) return <Spinner />;
   return (
     <div className="text-center">
       <header className="mb-4 text-2xl font-bold">
         Get time with Geo Coordinates
       </header>
       <div className="text-center">
-        <p className="font-bold text-xl mb-4">
-          your coordinates are latitude : {position?.lat} longitude :
+        <p className="mb-4 text-xl font-bold">
+          Your location's coordinates are <br/> latitude : {position?.lat},{" "}longitude :
           {position?.lng}
         </p>
         <input
           type="text"
           placeholder="Enter Latitude"
           value={latitude ? latitude : ""}
-          className="border-2 px-3 focus:border-blue-500 focus:outline-none focus:ring-1"
+          className="border-2 px-3 h-8 transition-all duration-300 focus:border-blue-500 focus:outline-none"
           onChange={latitudeOnchange}
         />
         <input
           type="text"
-          className="ml-2 border-2 px-3 focus:border-blue-500 focus:outline-none focus:ring-1"
+          className="ml-2 border-2 px-3 h-8 transition-all duration-300 focus:border-blue-500 focus:outline-none"
           placeholder="Enter Longitude"
           value={longitude ? longitude : ""}
           onChange={longitudeOnchange}
