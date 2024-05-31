@@ -10,7 +10,7 @@
   .dots-3 {
     width: 60px;
     aspect-ratio: 2;
-    --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+    --_g: no-repeat radial-gradient(circle closest-side, rgb(59 130 246) 90%, #00000000);
     background:
       var(--_g) 0% 50%,
       var(--_g) 50% 50%,

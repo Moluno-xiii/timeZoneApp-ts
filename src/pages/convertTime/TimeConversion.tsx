@@ -1,11 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom"; 
-import useFetchInfo from "../../hooks/useFetchInfo";
-import Spinner from "../../components/Spinner"
 
 const TimeConversion: React.FC = () => {
-  const { timeZone, isLoading } = useFetchInfo();
 
-  if (isLoading) return <Spinner />
   return (
     <div className="text-center">
       <ul className="mx-2 flex flex-row gap-2 md:gap-5">
@@ -41,9 +37,7 @@ const TimeConversion: React.FC = () => {
           </NavLink>
         </li>
       </ul>
-      <header>Get Time</header>
 
-      {isLoading ? <Spinner /> : <p>Your TimeZone : {timeZone}</p>}
 
       <main>
         <Outlet />

@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 const GetTime: React.FC = () => {
   return (
     <div className="text-center">
-      <ul className="flex flex-row gap-2 mx-2 md:gap-5">
+      <ul className="flex flex-row gap-2 mx-2 md:gap-5 justify-center">
         <li className="list-items">
           <NavLink
             className={({ isActive }) =>

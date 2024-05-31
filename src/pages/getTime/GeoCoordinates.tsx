@@ -28,7 +28,7 @@ const GeoCoordinates: React.FC = () => {
       <header className="mb-4 text-2xl font-bold">
         Get time with Geo Coordinates
       </header>
-      <div className="">
+      <div className="text-center">
         <p className="font-bold text-xl mb-4">
           your coordinates are latitude : {position?.lat} longitude :
           {position?.lng}
