@@ -1,49 +1,32 @@
-import useFetchInfo from "../../hooks/useFetchInfo";
 import Spinner from "../../components/Spinner";
 import Button from "../../components/Button";
-import { useState } from "react";
-
-interface dataTypes {
-  day: number;
-}
+import { useConvertToDayContext } from "../../contexts/ConvertTime/ConvertToDayContext";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const ConvertToDay: React.FC = () => {
-  const { isLoading } = useFetchInfo();
-  const [date, setDate] = useState("2021-12-05");
-  const [data, setData] = useState<dataTypes | undefined>(undefined);
-
-  async function convertTimeZone() {
-    const proxyURL = "http://localhost:3000/proxy?url";
-    const api_url = " https://timeapi.io/api/Conversion/DayOfTheYear";
-
-    try {
-      const response = await fetch(`${proxyURL}=${api_url}/${date}`);
-      const data = await response.json();
-      setData(data);
-      console.log(data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.error(error.message);
-    }
-  }
+  const { fetchData, dayData, date, isLoading, errorMessage, dateOnchange } =
+    useConvertToDayContext();
 
   if (isLoading) return <Spinner />;
   return (
     <div>
-      <header className="text-2xl font-bold mb-2">
+      <header className="mb-2 text-2xl font-bold">
         Get day of the year from a date
       </header>
       <input
         type="text"
         placeholder="YYYY-MM-DD"
         value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={dateOnchange}
         className="h-8 border border-slate-400 px-2 outline-none transition-all focus:border-red-500 focus:outline-none"
       />
-      <p>
-        {date} is the {data?.day} day of the year.
-      </p>
-      <Button onClick={convertTimeZone}>click me</Button>
+      {dayData && !errorMessage && !isLoading && (
+        <p>
+          {date} is day {dayData?.day} of the year.
+        </p>
+      )}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
+      <Button onClick={fetchData}>click me</Button>
     </div>
   );
 };

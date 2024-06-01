@@ -27,6 +27,7 @@ const TimeZone: React.FC = () => {
 
   // if (isLoading) return <Spinner />;
   if (loadingTz) return <Spinner />;
+  if (isLoading) return <Spinner />;
   if (errorMessage) return <ErrorMessage message={errorMessage} />;
   return (
     <div className="text-center">

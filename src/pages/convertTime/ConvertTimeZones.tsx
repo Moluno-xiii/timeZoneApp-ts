@@ -1,66 +1,27 @@
-import { useState } from "react";
 import { validTimeZones } from "../../misc/misc";
 import Button from "../../components/Button";
-import axios from "axios";
 import { convertTimeString } from "../../helper/helperFunctions";
-import useFetchInfo from "../../hooks/useFetchInfo";
 import Spinner from "../../components/Spinner";
-
-interface dataTypes {
-  conversionResult: {
-    date: string;
-    dateTime: string;
-    dstActive: boolean;
-    timeZone: string;
-  };
-  fromTimezone: string;
-  toTimeZone: string;
-  fromDateTime: string;
-}
-
-const proxyURL = "http://localhost:3000/proxy?url=";
-const url = "https://timeapi.io/api/Conversion/ConvertTimeZone";
+import { useConvertTimeZonesContext } from "../../contexts/ConvertTime/ConvertTimeZonesContext";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const ConvertTimeZones: React.FC = () => {
-   const { isLoading } = useFetchInfo();
-  const [fromTimeZone, setFromTimeZone] = useState<string>("Africa/Lagos");
-  const [toTimeZone, setToTimeZone] = useState<string>("America/Los_Angeles");
-  const [date, setDate] = useState("2024-05-31");
-  const [time, setTime] = useState("09:40:00");
-  const [data, setData] = useState<dataTypes | undefined>(undefined);
+  const {
+    fromTimeZone,
+    toTimeZone,
+    date,
+    isLoading,
+    errorMessage,
+    handleDateChange,
+    handleTimeChange,
+    time,
+    timeZoneData: data,
+    handleFromTimeZoneChange,
+    handleToTimeZoneChange,
+    fetchData,
+  } = useConvertTimeZonesContext();
+  if (isLoading) return <Spinner />;
 
-  const dateTime = `${date} ${time}`;
-  const handleToTimeZoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setToTimeZone(e.target.value);
-  };
-  const handleFromTimeZoneChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setFromTimeZone(e.target.value);
-  };
-
-  async function convertTimeZone() {
-    const data = {
-      fromTimeZone,
-      dateTime,
-      toTimeZone,
-      dstAmbiguity: "",
-    };
-
-    try {
-      const response = await axios.post(`${proxyURL}${url}`, data, {
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response.data);
-      setData(response.data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
- if (isLoading) return <Spinner />;
   return (
     <div className="text-center">
       <header className="mb-2 text-2xl font-bold">
@@ -96,17 +57,17 @@ const ConvertTimeZones: React.FC = () => {
           placeholder="HH:MM:SS (24 hr format)"
           className="h-8 border px-2 transition-all duration-300 focus:border-blue-400 focus:outline-none"
           value={time}
-          onChange={(e) => setTime(e.target.value)}
+          onChange={handleTimeChange}
         />
         <input
           type="text"
-          placeholder="YYYY:MM:DD"
+          placeholder="YYYY-MM-DD"
           className="h-8 border px-2 transition-all duration-300 focus:border-blue-400 focus:outline-none"
           value={date}
-          onChange={(e) => setDate(e.target.value)}
+          onChange={handleDateChange}
         />
       </div>
-      <p>
+    {data  &&  <p>
         converted date : {convertTimeString(data?.fromDateTime || "").date} and
         time : {convertTimeString(data?.fromDateTime || "").newTime} from{" "}
         <span className="text-red-400 hover:underline">
@@ -114,22 +75,26 @@ const ConvertTimeZones: React.FC = () => {
         </span>{" "}
         to{" "}
         <span className="text-red-400 hover:underline">{data?.toTimeZone}</span>
-      </p>
-      <ul>
-        <li>
-          Date : {convertTimeString(data?.conversionResult.dateTime || "").date}
-        </li>
-        <li>
-          Time :{" "}
-          {convertTimeString(data?.conversionResult.dateTime || "").newTime}
-        </li>
-        <li>Timezone : {data?.conversionResult.timeZone}</li>
-        <li>
-          Daylight saving :{" "}
-          {data?.conversionResult.dstActive ? "Active" : "Inactive"}
-        </li>
-      </ul>
-      <Button className="md:ml-5" onClick={convertTimeZone}>
+      </p>}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
+      {data && (
+        <ul>
+          <li>
+            Date :{" "}
+            {convertTimeString(data?.conversionResult.dateTime || "").date}
+          </li>
+          <li>
+            Time :{" "}
+            {convertTimeString(data?.conversionResult.dateTime || "").newTime}
+          </li>
+          <li>Timezone : {data?.conversionResult.timeZone}</li>
+          <li>
+            Daylight saving :{" "}
+            {data?.conversionResult.dstActive ? "Active" : "Inactive"}
+          </li>
+        </ul>
+      )}
+      <Button className="md:ml-5" onClick={fetchData}>
         fetch data
       </Button>
     </div>
