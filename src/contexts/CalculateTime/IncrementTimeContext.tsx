@@ -10,7 +10,6 @@ interface timeZoneTypes {
   fromDateTime: string;
   fromTimezone: ReactNode;
   toTimeZone: ReactNode;
-  conversionResult: any;
   calculationResult: {
     date: string;
     dateTime: string;
