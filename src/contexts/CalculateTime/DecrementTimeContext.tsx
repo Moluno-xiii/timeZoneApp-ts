@@ -75,10 +75,10 @@ type Action =
 
 const initialState: TimeZoneState = {
   timeZoneData: null,
-  time: "12:00:00",
-  timeZone: "Africa/Lagos",
-  timeSpan: "160:03:45:17",
-  date: "2024-06-01",
+  time: "",
+  timeZone: "",
+  timeSpan: "",
+  date: "",
   isLoading: false,
   errorMessage: "",
 };

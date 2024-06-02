@@ -50,20 +50,6 @@ const IncrementTime: React.FC = () => {
             onChange={handleTimeSpanChange}
           />
         </div>
-        {/* {data && (
-          <p>
-            converted date : {convertTimeString(data?.fromDateTime || "").date}{" "}
-            and time : {convertTimeString(data?.fromDateTime || "").newTime}{" "}
-            from{" "}
-            <span className="text-red-400 hover:underline">
-              {data?.fromTimezone}
-            </span>{" "}
-            to{" "}
-            <span className="text-red-400 hover:underline">
-              {data?.toTimeZone}
-            </span>
-          </p>
-        )} */}
         {errorMessage && <ErrorMessage message={errorMessage} />}
         {data && (
           <ul>

@@ -1,5 +1,4 @@
 import Button from "../../components/Button";
-import Loader from "../../components/Loader";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { convertTimeString } from "../../helper/helperFunctions";
@@ -75,7 +74,6 @@ const GeoCoordinates: React.FC = () => {
         </ul>
       )}
       <Button onClick={fetchTimezoneInfo}>Fetch Data</Button>
-      {isLoading && <Loader />}
     </div>
   );
 };
