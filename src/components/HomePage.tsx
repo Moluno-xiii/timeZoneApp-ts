@@ -21,12 +21,6 @@ const HomePage: React.FC = () => {
           </li>
         </NavLink>
 
-        {/* <li>
-          Don't know your timezone, check it
-          <NavLink to="findTimeZone">
-            <span className="text-purple-500"> here</span>
-          </NavLink>
-        </li> */}
       </ul>
     </nav>
     <div className="bottom-5 float-end">

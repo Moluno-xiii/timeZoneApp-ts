@@ -17,7 +17,6 @@ const useFetchInfo = () => {
         setError(null);
         const response = await fetch(IpURL);
         const data = await response.json();
-        // console.log(data);
         setIpAddress(data.ip);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
@@ -39,7 +38,6 @@ const useFetchInfo = () => {
         const response = await fetch(`${proxyURL}${timeZoneURL}${ipAddress}`);
 
         const data = await response.json();
-        // console.log(data);
         setTimeZone(data.timeZone);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {

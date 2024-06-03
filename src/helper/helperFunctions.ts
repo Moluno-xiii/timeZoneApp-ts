@@ -18,7 +18,6 @@ const convertTimeString = (dateString: string) => {
   }
 
   const newTime = `${hour}:${minute} ${suffix}`;
-  // console.log(newTime)
   return { newTime, date };
 };
 

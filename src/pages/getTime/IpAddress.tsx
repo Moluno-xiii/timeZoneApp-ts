@@ -38,7 +38,6 @@ const IpAddress: React.FC = () => {
         <div className="">
           <p>Your Timezone : {ipData?.timeZone} </p>
           <p>Your current Time : {formattedTime} </p>
-          {/* <p>Your current Date : {date} </p> */}
           <p>
             Daylight Savings :{" "}
             {ipData?.hasDayLightSaving === false ? "INACTIVE" : "ACTIVE"}{" "}

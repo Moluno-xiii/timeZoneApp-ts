@@ -34,7 +34,7 @@ export function useGeolocation(defaultPosition: Position = null) {
     }
 
     getPosition();
-  }, []); // Empty dependency array to run only on mount
+  }, []); 
 
   return { isLoading, position, error };
 }

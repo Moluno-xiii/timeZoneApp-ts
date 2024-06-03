@@ -25,7 +25,6 @@ const TimeZone: React.FC = () => {
     timeZone,
   } = timezoneData || {};
 
-  // if (isLoading) return <Spinner />;
   if (loadingTz) return <Spinner />;
   if (isLoading) return <Spinner />;
   if (errorMessage) return <ErrorMessage message={errorMessage} />;
