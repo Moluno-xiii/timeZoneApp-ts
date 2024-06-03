@@ -166,7 +166,6 @@ const IncrementTimeProvider: React.FC<{ children: ReactNode }> = ({
               "Content-Type": "application/json",
             },
           });
-          console.log(response.data);
           dispatch({ type: "SET_RECEIVED_DATA", payload: response.data });
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {

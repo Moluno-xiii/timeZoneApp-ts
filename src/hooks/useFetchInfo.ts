@@ -5,16 +5,16 @@ const proxyURL = "http://localhost:3000/proxy?url=";
 const timeZoneURL = "https://timeapi.io/api/Time/current/ip?ipAddress=";
 
 const useFetchInfo = () => {
-  const [ipAddress, setIpAddress] = useState<string | null>(null);
-  const [timeZone, setTimeZone] = useState<string | null>("");
-  const [errorMessage, setError] = useState<string | null>(null);
+  const [ipAddress, setIpAddress] = useState<string >('');
+  const [timeZone, setTimeZone] = useState<string >("");
+  const [errorMessage, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchIpInfo() {
       try {
         setIsLoading(true);
-        setError(null);
+        setError('');
         const response = await fetch(IpURL);
         const data = await response.json();
         setIpAddress(data.ip);
@@ -32,9 +32,9 @@ const useFetchInfo = () => {
   useEffect(() => {
     async function fetchTimeZone() {
       if (!ipAddress) return;
+      setError('');
+      setIsLoading(true);
       try {
-        setIsLoading(true);
-        setError(null);
         const response = await fetch(`${proxyURL}${timeZoneURL}${ipAddress}`);
 
         const data = await response.json();

@@ -49,7 +49,7 @@ const GeoCoordinates: React.FC = () => {
 
       {errorMessage && <ErrorMessage message={errorMessage} />}
 
-      {geoData && !errorMessage && (
+      {geoData &&  (
         <ul>
           {geoData.timeZone && <li>Your Timezone : {geoData.timeZone}</li>}
           {geoData.hasDayLightSaving !== undefined && (

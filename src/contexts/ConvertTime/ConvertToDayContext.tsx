@@ -85,7 +85,6 @@ const ConvertToDayContextProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({type: "SET_REQUEST_DATA"})
     const response = await fetch(`${proxyURL}=${api_url}/${date}`);
     const data = await response.json();
-    console.log(data);
     dispatch({type: "SET_RECEIVED_DATA", payload: data})
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

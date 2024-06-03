@@ -97,7 +97,6 @@ const IpProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       dispatch({ type: "SET_REQUEST_DATA" });
       const response = await fetch(`${proxyURL}=${API_URL}=${ipPlaceholder}`);
       const data = await response.json();
-      console.log(data);
       dispatch({ type: "SET_RECEIVED_DATA", payload: data });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

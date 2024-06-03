@@ -106,7 +106,6 @@ const GeoContextProvider: React.FC<{ children: ReactNode }> = ({
       dispatch({ type: "SET_LATITUDE", payload: position?.lat });
       dispatch({ type: "SET_LONGITUDE", payload: position?.lng });
     }
-    console.log(position);
   }, [position]);
 
   async function fetchTimezoneInfo() {
@@ -116,8 +115,6 @@ const GeoContextProvider: React.FC<{ children: ReactNode }> = ({
         `${proxyURL}=${API_URL}latitude=${latitude}&longitude=${longitude}`,
       );
       const data = await response.json();
-      console.log(data);
-      console.log(position);
       dispatch({ type: "SET_RECEIVED_DATA", payload: data });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
