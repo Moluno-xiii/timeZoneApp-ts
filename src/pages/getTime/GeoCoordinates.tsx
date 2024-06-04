@@ -27,20 +27,22 @@ const GeoCoordinates: React.FC = () => {
         Get time with Geo Coordinates
       </header>
       <div className="text-center">
-        <p className="mb-4 text-xl font-bold">
-          Your location's coordinates are <br/> latitude : {position?.lat},{" "}longitude :
-          {position?.lng}
-        </p>
+        {position && (
+          <p className="mb-4 text-xl font-bold">
+            Your location's coordinates are <br /> latitude : {position?.lat},{" "}
+            longitude :{position?.lng}
+          </p>
+        )}
         <input
           type="text"
           placeholder="Enter Latitude"
           value={latitude ? latitude : ""}
-          className="border-2 px-3 h-8 transition-all duration-300 focus:border-blue-500 focus:outline-none"
+          className="h-8 border-2 px-3 transition-all duration-300 focus:border-blue-500 focus:outline-none"
           onChange={latitudeOnchange}
         />
         <input
           type="text"
-          className="ml-2 border-2 px-3 h-8 transition-all duration-300 focus:border-blue-500 focus:outline-none"
+          className="ml-2 h-8 border-2 px-3 transition-all duration-300 focus:border-blue-500 focus:outline-none"
           placeholder="Enter Longitude"
           value={longitude ? longitude : ""}
           onChange={longitudeOnchange}
@@ -49,7 +51,7 @@ const GeoCoordinates: React.FC = () => {
 
       {errorMessage && <ErrorMessage message={errorMessage} />}
 
-      {geoData &&  (
+      {geoData && (
         <ul>
           {geoData.timeZone && <li>Your Timezone : {geoData.timeZone}</li>}
           {geoData.hasDayLightSaving !== undefined && (

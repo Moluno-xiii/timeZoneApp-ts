@@ -24,13 +24,13 @@ const IpAddress: React.FC = () => {
   return (
     <div className="text-center">
       <header className="mb-4 text-2xl font-bold">
-        Get Time info using any IpAddress <br/>
-        Your Location's IpAddress is : {ipAddress}
+        Get Time info using any IpAddress 
+        {ipAddress && <p>Your Location's IpAddress is : {ipAddress}</p>}
       </header>
       <input
         type="text"
         placeholder="00.00.00.00"
-        className="border-2 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 transition-all duration-300"
+        className="border-2 px-3 py-2 transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-1"
         value={ipPlaceholder}
         onChange={ipPlaceholderOnchange}
       />

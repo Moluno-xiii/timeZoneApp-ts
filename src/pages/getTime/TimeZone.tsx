@@ -33,7 +33,7 @@ const TimeZone: React.FC = () => {
       <header className="text-2xl font-bold">
         Get IANA time using Timezone
       </header>
-      <p className="mb-4 text-xl font-bold">Your Local Timezone : {tzData}</p>
+    {tzData &&  <p className="mb-4 text-xl font-bold">Your Local Timezone : {tzData}</p>}
 
       <select
         value={fromTimezone}
